@@ -1,0 +1,75 @@
+env:
+  browser: true
+  commonjs: true
+  es6: true
+  es2021: true
+  jest: true
+  node: true
+  'jest/globals': true
+extends:
+  - react-app
+  - eslint:recommended
+  - prettier
+  - prettier/react
+  - plugin:prettier/recommended
+  - plugin:react/recommended
+  - plugin:@typescript-eslint/recommended
+overrides: []
+parser: '@typescript-eslint/parser'
+parserOptions:
+  ecmaVersion: latest
+  ecmaFeatures:
+    generators: true
+  sourceType: module
+plugins:
+  - react
+  - jest
+  - '@typescript-eslint'
+rules:
+  indent:
+    - error
+    - tab
+  linebreak-style:
+    - error
+    - unix
+  quotes:
+    - error
+    - single
+  semi:
+    - error
+    - never
+  no-console:
+    - warn
+  no-var:
+    - warn
+  curly:
+    - warn
+  prefer-destructuring:
+    - warn
+  no-extra-semi:
+    - warn
+  '@typescript-eslint/no-extra-semi': 
+    - off
+  'import/order':
+    - warn
+    - newlines-between: always
+  'import/export': 
+    - warn
+  'jest/no-focused-tests': 
+    - error
+  no-debugger: 
+    - error
+  prefer-template: 
+    - warn
+  'react/prop-types': 
+    - error
+  'react-hooks/exhaustive-deps': 
+    - error
+  'react/jsx-key':
+    - warn
+    - checkFragmentShorthand: true
+  '@typescript-eslint/no-explicit-any': warn
+settings:
+  react: 
+    version: 
+      - detect
