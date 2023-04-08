@@ -1,3 +1,5 @@
+import Board from './Board'
+
 export default function Square() {
-	return <button className='square'>X</button>
+	return <Board />
 }
