@@ -1,5 +1,4 @@
 import Square from './Square'
-import { useState } from 'react'
 
 export default function Board(props: {
 	xIsNext: boolean
