@@ -4,6 +4,8 @@ import Board from './Board'
 export default function Game() {
 	const [history, setHistory] = useState([Array(9).fill(null)])
 	const [currentMove, setCurrentMove] = useState(0)
+	const [sortAsc, setSortAsc] = useState(true)
+
 	const xIsNext = currentMove % 2 === 0
 	const currentSquares = history[currentMove]
 
@@ -18,22 +20,35 @@ export default function Game() {
 		setCurrentMove(nextMove)
 	}
 
+	function toggleSort(): void {
+		setSortAsc(!sortAsc)
+	}
+
 	const moves = history.map((_squares, move) => {
 		const desc = move ? `Go to move #${move}` : 'Go to game start'
-		return (
-			<li key={move}>
-				{move === currentMove ? (
-					<small>
-						<i>{desc}</i>
-					</small>
-				) : (
-					<button onClick={() => jumpTo(move)} type='button'>
-						{desc}
-					</button>
-				)}
-			</li>
-		)
+		return {
+			move,
+			desc,
+		}
 	})
+
+	if (!sortAsc) {
+		moves.reverse()
+	}
+
+	const movesList = moves.map(({ move, desc }) => (
+		<li key={move}>
+			{move === currentMove ? (
+				<small>
+					<i>{desc}</i>
+				</small>
+			) : (
+				<button onClick={() => jumpTo(move)} type='button'>
+					{desc}
+				</button>
+			)}
+		</li>
+	))
 
 	return (
 		<div className='game'>
@@ -45,7 +60,10 @@ export default function Game() {
 				/>
 			</div>
 			<div className='game-info'>
-				<ol>{moves}</ol>
+				<button onClick={toggleSort} type='button'>
+					{sortAsc ? 'Sort Descending' : 'Sort Ascending'}
+				</button>
+				<ol>{movesList}</ol>
 			</div>
 		</div>
 	)
