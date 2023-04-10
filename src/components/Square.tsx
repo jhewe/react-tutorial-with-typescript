@@ -1,8 +1,8 @@
-export default function Square(prop: {
+export default function Square(props: {
 	value: string
 	onSquareClick: () => void
 }) {
-	const { value, onSquareClick } = prop
+	const { value, onSquareClick } = props
 
 	return (
 		<button className='square' type='button' onClick={onSquareClick}>

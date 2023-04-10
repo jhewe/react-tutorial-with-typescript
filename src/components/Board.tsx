@@ -1,9 +1,12 @@
 import Square from './Square'
 import { useState } from 'react'
 
-export default function Board() {
-	const [isXNext, setIsXNext] = useState(true)
-	const [squares, setSquares] = useState(Array(9).fill(null))
+export default function Board(props: {
+	xIsNext: boolean
+	squares: string[]
+	onPlay: (i: string[]) => void
+}) {
+	const { xIsNext, squares, onPlay } = props
 
 	const winner = calculateWinner(squares)
 
@@ -12,10 +15,10 @@ export default function Board() {
 			return
 		}
 
-		const nextSquare = [...squares]
-		nextSquare[i] = isXNext ? 'X' : 'O'
-		setSquares(nextSquare)
-		setIsXNext(!isXNext)
+		const nextSquares = [...squares]
+		nextSquares[i] = xIsNext ? 'X' : 'O'
+
+		onPlay(nextSquares)
 	}
 
 	return (
@@ -23,7 +26,7 @@ export default function Board() {
 			<div className='status'>
 				{winner
 					? `Winner: ${winner}`
-					: `Next player: ${isXNext ? 'X' : 'O'}`}
+					: `Next player: ${xIsNext ? 'X' : 'O'}`}
 			</div>
 			<div className='board-row'>
 				<Square
